@@ -1,5 +1,6 @@
 package gd.rf.thiagolemes.coursejava.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import gd.rf.thiagolemes.coursejava.entities.pk.OrderItemPk;
 
 import javax.persistence.EmbeddedId;
@@ -13,7 +14,7 @@ import java.util.Objects;
 public class OrderItem implements Serializable {
 
     @EmbeddedId
-    private OrderItemPk id;
+    private OrderItemPk id = new OrderItemPk(); // Sempre deve iniciar com chave auxiliar
 
     private Integer quantity;
     private Double price;
@@ -56,6 +57,7 @@ public class OrderItem implements Serializable {
         return Objects.hash(id);
     }
 
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }
