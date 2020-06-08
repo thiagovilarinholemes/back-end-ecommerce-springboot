@@ -2,6 +2,7 @@ package gd.rf.thiagolemes.coursejava.services;
 
 import gd.rf.thiagolemes.coursejava.entities.User;
 import gd.rf.thiagolemes.coursejava.repositories.UserRepository;
+import gd.rf.thiagolemes.coursejava.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class UserService {
 
     public User findById(Long id){
         Optional<User> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(()-> new ResourceNotFoundException(id));
     }
 
     // Retorna o usuário salvo
